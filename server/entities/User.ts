@@ -2,9 +2,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   Unique,
 } from "typeorm";
+import { Veiculo } from "./Veiculo";
+import { Servico } from "./Servicos";
 
 @Entity()
 @Unique(["email", "cpf"])
@@ -23,6 +26,12 @@ export class User {
 
   @Column({ type: "char", length: 11, nullable: false })
   telefone!: string;
+
+  @OneToMany(() => Veiculo, (veiculo) => veiculo.user)
+  veiculo!: Veiculo[];
+
+  @OneToMany(() => Servico, (servico) => servico.user)
+  servico!: Servico[];
 
   @CreateDateColumn({ type: Date })
   createdAt!: Date;
