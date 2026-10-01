@@ -1,4 +1,5 @@
 import {
+  Column,
   Entity,
   ManyToOne,
   OneToMany,
@@ -13,6 +14,9 @@ import { Servico } from "./Servicos";
 export class Veiculo {
   @PrimaryGeneratedColumn()
   id!: number;
+
+  @Column({ type: "varchar", length: 7 })
+  placa!: string;
 
   @ManyToOne(() => User, (user) => user.veiculo)
   user!: User;
