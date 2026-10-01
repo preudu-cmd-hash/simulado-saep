@@ -17,9 +17,9 @@ export class Servico {
   @OneToMany(() => User, (user) => user.servico)
   user!: User;
 
-  @OneToOne(() => Veiculo, (veiculo) => veiculo.servico)
+  @OneToMany(() => Veiculo, (veiculo) => veiculo.servico)
   veiculo!: Veiculo;
 
-  @CreateDateColumn({type: Date})
-  dataEmissao!: Date
+  @CreateDateColumn({ type: Date })
+  dataEmissao!: Date;
 }

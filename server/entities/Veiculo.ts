@@ -21,6 +21,6 @@ export class Veiculo {
   @ManyToOne(() => User, (user) => user.veiculo)
   user!: User;
 
-  @ManyToOne(() => Servico, (servico) => servico.veiculo)
+  @OneToMany(() => Servico, (servico) => servico.veiculo)
   servico!: Servico[];
 }
