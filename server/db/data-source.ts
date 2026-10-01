@@ -7,6 +7,5 @@ export const AppDataSource = new DataSource({
 
   entities: [__dirname + "/../entities/*.ts"],
 
-  synchronize: false,
-  logging: false,
+  synchronize: true,
 });
