@@ -1,0 +1,1 @@
+-- Triggers podem ser adicionados aqui conforme a regra de negócio do sistema.

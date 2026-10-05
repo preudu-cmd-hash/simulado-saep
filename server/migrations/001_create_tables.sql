@@ -1,0 +1,32 @@
+CREATE TABLE IF NOT EXISTS "user" (
+  "id" SERIAL PRIMARY KEY,
+  "nome" VARCHAR(100) NOT NULL,
+  "email" VARCHAR(255) NOT NULL,
+  "cpf" CHAR(11) NOT NULL,
+  "telefone" CHAR(11) NOT NULL,
+  "createdAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT "uq_user_email_cpf" UNIQUE ("email", "cpf")
+);
+
+CREATE TABLE IF NOT EXISTS "veiculo" (
+  "id" SERIAL PRIMARY KEY,
+  "placa" VARCHAR(7) NOT NULL,
+  "userId" INTEGER NOT NULL,
+  CONSTRAINT "uq_veiculo_placa" UNIQUE ("placa"),
+  CONSTRAINT "fk_veiculo_user"
+    FOREIGN KEY ("userId") REFERENCES "user" ("id")
+    ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS "servico" (
+  "id" SERIAL PRIMARY KEY,
+  "userId" INTEGER NOT NULL,
+  "veiculoId" INTEGER NOT NULL,
+  "dataEmissao" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT "fk_servico_user"
+    FOREIGN KEY ("userId") REFERENCES "user" ("id")
+    ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT "fk_servico_veiculo"
+    FOREIGN KEY ("veiculoId") REFERENCES "veiculo" ("id")
+    ON DELETE RESTRICT ON UPDATE CASCADE
+);
